@@ -1,0 +1,3 @@
+.venv/
+*.config
+!Sierra4.config
