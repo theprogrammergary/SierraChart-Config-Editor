@@ -46,13 +46,19 @@ def format_hex_string(hex_string):
     return " ".join(hex_string[i : i + 2] for i in range(0, len(hex_string), 2))
 
 
-def valid_group_data(group_data: str) -> bool:
+def format_group_string_to_list(group_data: str) -> list[str]:
     group_size: int = 6
     skip_size: int = 2
     color_hex_values: list[str] = [
         group_data[i : i + group_size]
         for i in range(0, len(group_data), group_size + skip_size)
     ]
+
+    return color_hex_values
+
+
+def valid_group_data(group_data: str) -> bool:
+    color_hex_values = format_group_string_to_list(group_data)
 
     if len(color_hex_values) != 20:
         return False
@@ -82,6 +88,64 @@ def get_group_data(file_path: str) -> list[tuple[str, str]]:
     return valid_data_groups
 
 
+def read_and_modify_binary_file(
+    file_path: str, group_data_list: list[tuple[str, str]]
+) -> None:
+    """
+    Changes a Sierra4.config file bytes.
+    Finds a header position and then updates the color for
+    each of the 20 global graphic configs
+
+    Args:
+        file_path (str): The path to the binary file.
+        search_sequence (tuple): The search sequence to find in the file.
+        changes (list): The list of changes to apply.
+    """
+
+    with open(file=file_path, mode="rb") as file:
+        binary_data: bytes = file.read()
+
+    if binary_data is None:
+        return
+
+    for i, (group_name, group_data) in enumerate(group_data_list):
+        search_sequence = group_name
+        current_values = format_group_string_to_list
+
+        print(f"search {search_sequence}")
+        break
+
+    return
+    # Convert the second string in the search_sequence tuple to a list of strings
+    group_data_str = search_sequence[1]
+    color_hex_values = format_group_string_to_list(group_data_str)
+
+    # Find the position of the search sequence
+    position: int = binary_data.find(search_sequence[0])
+
+    if position != -1:
+        # Apply changes to the bytes following the search sequence
+        for change in changes:
+            for color_hex in color_hex_values:
+                change_bytes = bytes.fromhex(color_hex + "00")  # Add '00' to the end
+                binary_data = (
+                    binary_data[: position + len(search_sequence[0])]
+                    + change_bytes
+                    + binary_data[
+                        position + len(search_sequence[0]) + len(change_bytes) :
+                    ]
+                )
+                position += len(change_bytes)
+
+        # Write the modified binary data back to the file
+        with open(file=file_path, mode="wb") as file:
+            file.write(binary_data)
+
+        print("\n\nChanges applied successfully.")
+    else:
+        print("\n\nSearch sequence not found in the file.")
+
+
 def main():
     config_file_path: str = os.path.join(os.getcwd(), "src", "DEFAULT4.config")
 
@@ -89,13 +153,14 @@ def main():
 
     group_data = get_group_data(config_file_path)
 
-    print(len(group_data))
+    if group_data is not None:
+        read_and_modify_binary_file(config_file_path, group_data)
 
-    print(group_data[0])
+    # TODO:
+    # - start with a refactoring of group_name it is confusing....is it a singular or what
+    # - dont need to format the current byte when looping through to change binary...instead can
+    #       just get the index from the color_map.json
 
 
 if __name__ == "__main__":
     main()
-
-
-# EC 09 54 00 14 00 04

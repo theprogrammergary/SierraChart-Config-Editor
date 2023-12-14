@@ -1,4 +1,43 @@
 {
   "Chart Text": "C1 0A 54 00 14 00 04 00",
-  "Chart Values Scale Text Color": "1C 11 54 00 14 00 04 00"
+  "Chart Values Scale Text Color": "1C 11 54 00 14 00 04 00",
+
+
+  "Time and Sales: Bid Trades Background": "F4 0A 54 00 14 00 04 00",
+  "Time and Sales: Bid Trades Text": "F5 0A 54 00 14 00 04 00",
+  "Time and Sales: Below Bid Trades Trades Background": "F6 0A 54 00 14 00 04 00",
+  "Time and Sales: Below Bid Trades Trades Text": "F7 0A 54 00 14 00 04 00",
+  "Time and Sales: Ask Trades Background": "F8 0A 54 00 14 00 04 00",
+  "Time and Sales: Ask Trades Text": "F9 0A 54 00 14 00 04 00",
+  "Time and Sales: Above Ask Trades Background": "FA 0A 54 00 14 00 04 00",
+  "Time and Sales: Above Ask Trades Text": "FB 0A 54 00 14 00 04"
+  //
 }
+  "Time and Sales: Bid and Ask Records Trades Background": "FC 0A 54 00 14 00 04 00",
+  "Time and Sales: Bid and Ask Records Trades Text": "FD 0A 54 00 14 00 04"
+  //
+  "Time and Sales: Grid": "5E 0E 54 00 14 00 04 00",
+  //
+  "Time and Sales: Bid Highlight Color": "FE 0A 54 00 14 00 04 00",
+  "Time and Sales: Bid Highlight Text Color": "F4 0F 54 00 14 00 04 00"
+  //
+  "Time and Sales: Ask Highlight Color": "FF 0A 54 00 14 00 04 00",
+  "Time and Sales: Ask Highlight Text Color": "F5 0F 54 00 14 00 04 00"
+  //
+}
+
+
+// find groups....make unique changes for each group number
+
+// background 18 19 1A
+// red FF 00 00
+// below red ff80ff FF 80 FF
+// green 28a428 28 A4 28
+// above green 00ffb9 00 FF B9
+
+
+// bid highlight bg 970000 97 00 00
+// bid hight text = ffffff FF FF FF
+
+// ask highlight bg 228b22 22 8B 22
+// bid hight text = ffffff FF FF FF

@@ -1,7 +1,11 @@
 """
 Compares two sierr4.config files and prints out the differences.
 This was primarily used to build out the map of the bytes/hex chars.
-I would start with the same config file and make one change and then write down the change.
+1. Make a manual change to one color value
+2. Run this file.
+3. See the list of changes and go into HxD to find start of groups bytes
+3. Add the bytes to map.json
+build out map
 """
 import difflib
 
